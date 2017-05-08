@@ -5,7 +5,9 @@ import os
 import sys
 import time
 import shutil
+import logging
 
+logger = logging.Logger()
 
 # path = r"E:\python_handle_pictures\test_pict"
 
@@ -13,16 +15,26 @@ import shutil
 
 # picture = r"file.jpg"
 
+imagetype = [".jpg",".png",".jpeg",".bmp"]
 
 def change_to_current_path():
+    """
+    将工作目录切换到.py文件所在的目录
+    :return:
+    """
     current_path = os.getcwd()
     os.chdir(current_path)
 
     
 def get_all_pictures(path):
+    """
+    获取目录下所有的图片
+    :param path:
+    :return: 返回所有图片文件
+    """
     files_list = os.listdir(path)
     for files in files_list:
-        if os.path.isdir(files):    # 排除文件夹
+        if os.path.isdir(files) or os.path.splitext(files)[1] not in imagetype:    # 排除文件夹以及文件类型不属于图片的文件
             files_list.remove(files)
     return files_list
             
