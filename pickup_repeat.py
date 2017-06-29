@@ -19,7 +19,7 @@ def getmd5(filename):
 	with open(filename, 'rb') as fd:
 		file_txt = fd.read()
 		m = md5(file_txt)
-		print("%s : %s"%(m, filename))
+		print("%s : %s"%(m.hexdigest(), filename))
 		return m.hexdigest()
 
 def creatDir(newdir):
@@ -73,12 +73,14 @@ def main():
 	for item in os.listdir(rootpath):
 		if item == 'repeat_picture':						# 防止第二次运行进入repeat_picture文件夹
 			continue
-		if os.path.splitext(item)[-1] not in pic_format:	# 防止文件夹中有其他类型的文件
-			continue
+
 			
 		if os.path.isdir(item):								# 如果为文件夹，则进入文件夹
 			os.chdir(item)
 			for file in os.listdir(os.getcwd()):
+				if os.path.splitext(file)[-1] not in pic_format:	# 防止文件夹中有其他类型的文件
+					print(file,'不做处理')
+					continue
 				handle_repeat_files(file)
 			os.chdir(r"../")
 		else:

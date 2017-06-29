@@ -7,7 +7,7 @@ import time
 import shutil
 import logging
 
-logger = logging.Logger()
+# logger = logging.Logger()
 
 # path = r"E:\python_handle_pictures\test_pict"
 
